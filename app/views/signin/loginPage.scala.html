@@ -1,0 +1,21 @@
+@(loginForm: play.api.data.Form[AuthenticationController.Login], registerForm: play.api.data.Form[AuthenticationController.Register])(implicit request: play.api.mvc.Request[Any], lang: Lang)
+
+@import play.api.i18n.Messages
+@import scala.collection.JavaConversions._
+
+@scripts = {
+  <script type="text/javascript" src='@routes.Assets.at("javascripts/signin.js")'></script>
+}
+
+@mainPage(Html(Messages("signin.title")), scripts = scripts) {
+  <section>
+    <div class="row" id="registerRow" data-url="@request.uri">
+      <div class="col-md-6">
+        @views.html.signin.loginPanel(loginForm)
+      </div>
+      <div class="col-md-6">
+        @views.html.signin.registerPanel(registerForm)
+      </div>
+    </div>
+  </section>
+}

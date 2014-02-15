@@ -1,0 +1,14 @@
+package neo4j.models;
+
+import neo4j.relations.Relations;
+import org.neo4j.graphdb.Direction;
+import org.springframework.data.neo4j.annotation.RelatedTo;
+
+import java.util.Set;
+
+public class CommentAbleModel extends TokenBasedModel {
+
+  @RelatedTo(type = Relations.COMMENTABLE_COMMENT, direction = Direction.INCOMING)
+  public Set<Comment> comments;
+
+}

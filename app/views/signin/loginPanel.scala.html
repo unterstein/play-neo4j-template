@@ -1,0 +1,36 @@
+@(loginForm: play.api.data.Form[AuthenticationController.Login])(implicit request: play.api.mvc.Request[Any], lang: Lang)
+
+@import play.api.i18n.Messages
+@import helper._
+@import scala.collection.JavaConversions._
+
+@helper.form(routes.AuthenticationController.loginUser, 'class -> "form-horizontal") {
+  <h2>@Messages("login")</h2>
+  <div class="well">
+    <fieldset>
+      <input type="hidden" name="loginUrl" value="@if(loginForm.data.get("loginUrl") == None) {@request.uri} else {@loginForm.data.get("loginUrl")}" />
+      @if(loginForm.hasErrors) {
+        <p class="alert alert-danger">
+        @loginForm.errors.map { msg =>
+          @if(msg.key != null && msg.key.length > 0) {@Messages(msg.key) :} @if(msg.args.size > 0) {@Messages(msg.message, msg.args.get(0)) } else {
+          @Messages(msg.message)
+          } <br/>
+        }
+        </p>
+      }
+      <div class="form-group @("has-error".when(loginForm.errors("loginEmail").size > 0))">
+        <label for="loginEmail" class="col-md-3 control-label">@Messages("email")</label>
+        <div class="col-md-9">
+          <input autocomplete="off"type="email" class="form-control" id="loginEmail" name="loginEmail" placeholder="@Messages("email")" value="@loginForm.data.get("loginEmail")" />
+        </div>
+      </div>
+      <div class="form-group @("has-error".when(loginForm.errors("loginPassword").size > 0))">
+        <label for="loginPassword" class="col-md-3 control-label">@Messages("password")</label>
+        <div class="col-md-9">
+          <input autocomplete="off" type="password" class="form-control" id="loginPassword" name="loginPassword" placeholder="@Messages("password")" value="@loginForm.data.get("loginPassword")" />
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">@Messages("login")</button>
+    </fieldset>
+  </div>
+}

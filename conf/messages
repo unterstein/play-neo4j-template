@@ -1,0 +1,45 @@
+# meta
+title=Micromata supportweb
+app.title=<i class="fa fa-tachometer"></i> supportweb
+keywords=
+description=
+
+# authentication
+login=Log in
+logout=Log out
+or=or
+register=Sign in
+signin.title=<i class="fa fa-tachometer"></i> Log in to your supportweb account
+
+# general
+toggle=Toggle navigation
+account=Account
+email=Mail
+registerEmail=Mail
+loginEmail=Mail
+loginUsername=Username
+registerPassword=Password
+password=Password
+loginPassword=Password
+repassword=Repeat
+repassword.placeholder=Repeat password
+yes=Yes
+no=No
+cancel=Cancel
+file.label=File
+file.select=Browse
+day.input.pattern=MM/dd/yyyy hh:mm
+save=Save
+
+# navi
+navi.dashboard=Dashboard
+
+# dashboard
+dashboard.title=<i class="fa fa-signal"></i> Dashboard - all important information on one view
+
+# errors
+error.passwordNotMatch=Passwords do not match
+error.duplicateEmail=E-Mail already exists
+error.signInFailed=Login failed
+error.email=Email required
+error.required=Field required
