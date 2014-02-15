@@ -32,7 +32,7 @@ public class User extends AbstractModel {
     if (user == null) {
       return null;
     }
-    if (user.password != null && user.password.equals(hashedPw) && user.userState != UserState.HARD_LOCK) {
+    if (user.password != null && user.password.equals(hashedPw) && user.userState != UserState.LOCK) {
       return user;
     }
     return null;
@@ -40,7 +40,7 @@ public class User extends AbstractModel {
 
   public static boolean checkIfUserExsists(String email) {
     User user = getUserByEMail(email);
-    return user != null && user.userState != UserState.HARD_LOCK;
+    return user != null && user.userState != UserState.LOCK;
   }
 
   public static User getUserByEMail(String email) {
