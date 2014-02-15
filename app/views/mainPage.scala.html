@@ -36,26 +36,19 @@
           </div>
           <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Action</a></li>
-                  <li><a href="#">Another action</a></li>
-                  <li><a href="#">Something else here</a></li>
-                  <li class="divider"></li>
-                  <li class="dropdown-header">Nav header</li>
-                  <li><a href="#">Separated link</a></li>
-                  <li><a href="#">One more separated link</a></li>
-                </ul>
-              </li>
+              @if(PlaySession.isLoggedIn) {
+                @buildNav("dashboard", "signal", routes.DashboardController.dashboard)
+                @buildNav("logout", "sign-out", routes.AuthenticationController.logout)
+              } else {
+                @buildNav("login", "sign-in", routes.AuthenticationController.login)
+              }
             </ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </header>
+
+    @content
 
     <script type='text/javascript' src='@routes.Assets.at("javascripts/jquery-1.11.0.min.js")'></script>
     <script type='text/javascript' src='@routes.Assets.at("javascripts/bootstrap.min.js")'></script>
@@ -68,7 +61,7 @@
 @buildNav(name: String, cssClass: String, route: Object) = {
   <li class="@("active".when(route.toString.equals(request.uri)))">
     <a href="@route">
-      <i class="fa fa-lg fa-fw fa-@cssClass"></i> <span class="menu-item-parent">@Messages("navi." + name)</span>
+      <i class="fa fa-@cssClass"></i> @Messages("navi." + name)
     </a>
   </li>
 }

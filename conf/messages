@@ -33,6 +33,8 @@ save=Save
 
 # navi
 navi.dashboard=Dashboard
+navi.logout=Log out
+navi.login=Log in
 
 # dashboard
 dashboard.title=<i class="fa fa-signal"></i> Dashboard - all important information on one view
