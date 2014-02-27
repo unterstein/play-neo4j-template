@@ -14,9 +14,9 @@ signin.title=<i class="fa fa-tachometer"></i> Log in to your account
 # general
 toggle=Toggle navigation
 account=Account
-email=Mail
-registerEmail=Mail
-loginEmail=Mail
+email=E-Mail
+registerEmail=E-Mail
+loginEmail=E-Mail
 loginUsername=Username
 registerPassword=Password
 password=Password
@@ -30,14 +30,47 @@ file.label=File
 file.select=Browse
 day.input.pattern=MM/dd/yyyy hh:mm
 save=Save
+edit=Edit
+back=Back
+delete=Delete
+delete.confirm=Do you really want to delete this item?
+close=Close
+confirm=Confirm
+open=Open
+author=Author
+name=Name
+comment=Comment
+headline=Headline
+empty.select=Please choose
 
 # navi
 navi.dashboard=Dashboard
 navi.logout=Log out
 navi.login=Log in
+navi.users=Users
+
+field.headline=Headline
+field.headline.placeholder=Please enter a headline
+field.text=Text
+field.name=Name
+field.name.placeholder=Please enter a name
+field.email=E-Mail
+field.email.placeholder=Please enter an E-Mail
+field.userRole=User role
+field.userState= User state
+field.password=Password
+field.password.placeholder=Please enter a password
 
 # dashboard
 dashboard.title=<i class="fa fa-signal"></i> Dashboard - all important information on one view
+
+# users
+user.edit.title=Edit user
+user.create.title=Create new user
+user.list.title=<i class="fa fa-users"></i> List of users
+user.open=Edit user
+user.create=Create new user
+user.edit=Edit user
 
 # errors
 error.passwordNotMatch=Passwords do not match

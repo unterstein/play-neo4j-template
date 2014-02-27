@@ -38,6 +38,7 @@
             <ul class="nav navbar-nav">
               @if(PlaySession.isLoggedIn) {
                 @buildNav("dashboard", "signal", routes.DashboardController.dashboard)
+                @buildNav("users", "users", routes.UserController.userList)
                 @buildNav("logout", "sign-out", routes.AuthenticationController.logout)
               } else {
                 @buildNav("login", "sign-in", routes.AuthenticationController.login)
@@ -49,8 +50,28 @@
     </header>
 
     <main class="container">
+      <h1 class="page-header">@headline</h1>
       @content
     </main>
+
+    <!-- delete modal -->
+    <div class="modal fade" id="deleteModal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">@Messages("delete")</h4>
+          </div>
+          <div class="modal-body">
+          @Messages("delete.confirm")
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">@Messages("close")</button>
+            <button type="button" class="btn btn-danger pull-right" id="deleteConfirm">@Messages("confirm")</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script type='text/javascript' src='@routes.Assets.at("javascripts/jquery-1.11.0.min.js")'></script>
     <script type='text/javascript' src='@routes.Assets.at("javascripts/bootstrap.min.js")'></script>
