@@ -31,6 +31,7 @@
 
   window.doAfterAjaxHandling = function () {
     doFileUpload();
+    $("textarea").autoGrow();
   }
 
   $(function () {
@@ -45,6 +46,18 @@
         return true;
       }
     });
+    /* deletes */
+    $(document).on("click", ".delete", function(e) {
+      var that = $(this);
+      $("#deleteModal").modal("show");
+      $("#deleteConfirm").unbind("click").bind("click", function() {
+        $.post(that.data("url"))
+          .success(function() {
+            window.location.href = that.data("success")
+          });
+      });
+    });
+
     /* focus behavior */
     $(document).on("shown.bs.modal", ".modal", function () {
       $($(this).find(".modal-body :input[type!='hidden']")[0]).focus();

@@ -16,7 +16,7 @@ object UserController extends BaseController {
 
   def create = AuthenticatedLoggingAction(UserRole.ADMIN) {
     implicit request =>
-      Ok(views.html.user.userEditPage(0L, userForm, "create"))
+      Ok(views.html.user.userEditPage(-1L, userForm, "create"))
   }
 
   def delete(id: Long) = AuthenticatedLoggingAction(UserRole.ADMIN) {

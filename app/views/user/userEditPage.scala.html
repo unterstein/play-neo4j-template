@@ -7,7 +7,7 @@
 @import views.html.helper.{inputRow, textareaRow, formErrors, dropDownRow}
 
 @mainPage(Html(Messages("user." + mode + ".title"))) {
-  @helper.form(if(id > 0) { routes.UserController.postEdit(id) } else {routes.UserController.postCreate }) {
+  @helper.form(if(id >= 0) { routes.UserController.postEdit(id) } else {routes.UserController.postCreate }) {
     @formErrors(form.asInstanceOf[Form[Any]])
     <div class="row">
       <div class="col-md-12">
@@ -44,10 +44,10 @@
     <div class="row">
       <div class="col-md-12">
         <a class="btn btn-default" href="@routes.UserController.userList">@Messages("back")</a>
-        @if(id > 0 && PlaySession.isAdmin) {
+        @if(id >= 0 && PlaySession.isAdmin) {
           <a class="btn btn-danger delete" data-url="@routes.UserController.delete(id)" data-success="@routes.UserController.userList">@Messages("delete")</a>
         }
-        <button type="submit" class="btn btn-primary pull-right">@Messages(if(id > 0) "user.edit" else "user.create")</button>
+        <button type="submit" class="btn btn-primary pull-right">@Messages(if(id >= 0) "user.edit" else "user.create")</button>
       </div>
     </div>
   }
