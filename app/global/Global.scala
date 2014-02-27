@@ -26,7 +26,9 @@ object Global extends GlobalSettings {
     if (Neo4JServiceProvider.get().userRepository.count() == 0) {
       val johannes = User.create("unterstein@me.com", "password", null)
       johannes.userRole = UserRole.ADMIN
+      johannes.name = "Johannes Unterstein"
       Neo4JServiceProvider.get().userRepository.save(johannes)
+      Neo4JServiceProvider.get().userRepository.save(User.create("test@test.de", "test", johannes))
     }
   }
 
