@@ -3,6 +3,8 @@ package global
 import play.api._
 import scala.Boolean
 import java.io.File
+import neo4j.services.Neo4JServiceProvider
+import neo4j.models.user.{UserRole, User}
 
 object Global extends GlobalSettings {
   private var app: Application = null
@@ -17,6 +19,15 @@ object Global extends GlobalSettings {
     //    Neo4JServiceProvider.init()
     initDevLogging()
     initFileSystem()
+    initInitialData()
+  }
+
+  private def initInitialData() = {
+    if (Neo4JServiceProvider.get().userRepository.count() == 0) {
+      val johannes = User.create("unterstein@me.com", "password", null)
+      johannes.userRole = UserRole.ADMIN
+      Neo4JServiceProvider.get().userRepository.save(johannes)
+    }
   }
 
   private def initFileSystem() = {
