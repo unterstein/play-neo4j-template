@@ -69,6 +69,7 @@
         that.selectAll();
       }, 100);
     });
+    $("select.select2").select2();
   });
 
   function doFileUpload() {

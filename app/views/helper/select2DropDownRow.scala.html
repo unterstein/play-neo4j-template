@@ -1,0 +1,9 @@
+@(name: String, selectedValues: scala.collection.immutable.List[String], enumModel: _root_.helper.ViewEnumModel)(implicit request: play.api.mvc.Request[Any], lang: Lang)
+<div class="form-group">
+  <label for="@name" class="control-label">@Messages("field." + name.replace("[$x]", ""))</label>
+  <select multiple id="@name" name="@name" class="form-control select2">
+    @enumModel.keys.map { iterValue =>
+      <option @if(selectedValues.contains(iterValue)) {selected} value="@iterValue">@enumModel.values.get(iterValue)</option>
+    }
+  </select>
+</div>
