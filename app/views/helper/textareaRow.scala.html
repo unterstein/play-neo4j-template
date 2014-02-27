@@ -1,0 +1,5 @@
+@(name: String, value: Option[String], error: Boolean, i18n: String = "")(implicit request: play.api.mvc.Request[Any], lang: Lang)
+<div class="form-group @("has-error".when(error == true))">
+  <label for="@name" class="control-label">@Messages(if(i18n == "") { "field." + name.replace("[$x]", "") } else { i18n })</label>
+  <textarea class="form-control" name="@name" id="@name">@value</textarea>
+</div>

@@ -8,6 +8,13 @@ GET         /                                    controllers.ApplicationControll
 # Dashboard
 GET         /dashboard                           controllers.DashboardController.dashboard
 
+# User
+GET         /users                               controllers.UserController.userList
+GET         /users/create                        controllers.UserController.create
+GET         /users/edit/:id                      controllers.UserController.edit(id: Long)
+POST        /users/edit/:id/edit                 controllers.UserController.postEdit(id: Long)
+POST        /users/edit/:id/delete               controllers.UserController.delete(id: Long)
+POST        /users/postCreate                    controllers.UserController.postCreate
 
 # Authentication
 GET         /login                               controllers.AuthenticationController.login

@@ -1,7 +1,5 @@
-@(name: String, inputType: String, value: Option[String], error: Boolean)(implicit request: play.api.mvc.Request[Any], lang: Lang)
+@(name: String, inputType: String, value: Option[String], error: Boolean, i18n: String = "")(implicit request: play.api.mvc.Request[Any], lang: Lang)
 <div class="form-group @("has-error".when(error == true))">
-  <label for="@name" class="col-md-2 control-label">@Messages("field." + name.replace("[$x]", ""))</label>
-  <div class="col-md-10">
-    <input type="@inputType" class="form-control" name="@name" placeholder="@Messages("field." + name.replace("[$x]", "") + ".placeholder")" value="@value">
-  </div>
+  <label for="@name" class="control-label">@Messages(if(i18n == "") { "field." + name.replace("[$x]", "") } else { i18n })</label>
+  <input type="@inputType" class="form-control" id="@name" name="@name" placeholder="@Messages("field." + name.replace("[$x]", "") + ".placeholder")" value="@value">
 </div>

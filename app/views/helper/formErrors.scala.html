@@ -1,0 +1,22 @@
+@(form: Form[Any])(implicit request: play.api.mvc.Request[Any], lang: Lang)
+@import org.apache.commons.lang3.StringUtils
+@if(form.hasErrors) {
+  <p class="alert alert-danger">
+  @form.errors.map { msg =>
+    @if(StringUtils.isNotBlank(msg.key)) {
+     @Messages("field." + msg.key.substring(msg.key.indexOf(".") + 1)) :
+    }
+
+    @if(msg.args.size > 1) {
+      @Messages(msg.message, msg.args(0), msg.args(1))
+    }else{
+      @if(msg.args.size == 1) {
+        @Messages(msg.message, msg.args(0))
+      } else {
+        @Messages(msg.message)
+      }
+    }
+    <br/>
+  }
+  </p>
+}
