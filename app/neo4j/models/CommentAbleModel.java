@@ -6,7 +6,7 @@ import org.springframework.data.neo4j.annotation.RelatedTo;
 
 import java.util.Set;
 
-public class CommentAbleModel extends TokenBasedModel {
+public class CommentAbleModel extends AbstractModel {
 
   @RelatedTo(type = Relations.COMMENTABLE_COMMENT, direction = Direction.INCOMING)
   public Set<Comment> comments;
