@@ -5,22 +5,39 @@ import neo4j.models.log.PerformanceLog
 import neo4j.models.log.LogCategory
 import scala.{None, Option}
 import scala.Predef._
-import neo4j.models.user.User
 import views.html
 import play.api.i18n.Lang
 import play.api.Play.current
+import neo4j.models.user.{UserRole, User}
+import neo4j.services.Neo4JServiceProvider
+import scala.util.control.Exception.allCatch
 
 trait BaseController extends Controller {
+
   def LoggingAction(f: Request[AnyContent] => Result): Action[AnyContent] = {
     Action {
       implicit request =>
-        val start = System.currentTimeMillis()
-        val result = f(request)
-        val end = System.currentTimeMillis()
-        PerformanceLog.create(end - start, LogCategory.REQUEST, request)
-        result
+        val serviceProvider: Neo4JServiceProvider = Neo4JServiceProvider.get()
+        val tx = serviceProvider.template.getGraphDatabase.beginTx
+        try {
+          val start = System.currentTimeMillis()
+          val result = f(request)
+          val end = System.currentTimeMillis()
+          PerformanceLog.create(end - start, LogCategory.REQUEST, request)
+          tx.success()
+          result
+        }
+        catch {
+          case t: Throwable => {
+            tx.failure()
+            throw t
+          }
+        } finally {
+          tx.finish()
+        }
     }
   }
+
   private def userUsername(request: RequestHeader): Option[String] = {
     val username = request.session.get(PlaySession.AUTH_SESSION)
     if (username == None) {
@@ -34,18 +51,28 @@ trait BaseController extends Controller {
       }
     }
   }
+
   private def userOnUnauthorized(requestHeader: RequestHeader) = {
     val request = Request.apply(requestHeader, null)
     Results.Ok(html.signin.loginPage(AuthenticationController.loginForm, AuthenticationController.registerForm)(request, calcLang(request)))
   }
 
-  def AuthenticatedLoggingAction(f: => String => Request[AnyContent] => Result) = Security.Authenticated(userUsername, userOnUnauthorized) {
+  def AuthenticatedLoggingAction(role: UserRole)(f: => Request[AnyContent] => Result) = Security.Authenticated(userUsername, userOnUnauthorized) {
     user => {
-      LoggingAction(request => f(user)(request).withSession(PlaySession.AUTH_SESSION -> user))
+      val dbUser = Neo4JServiceProvider.get().userRepository.findByEmail(user)
+      if(dbUser.hasMinRole(role)) {
+        LoggingAction(request => f(request).withSession(PlaySession.AUTH_SESSION -> user))
+      } else {
+        LoggingAction(request => Redirect("404"))
+      }
     }
   }
 
   def calcLang(request: Request[Any]): Lang = {
     Lang.preferred(request.acceptLanguages)
   }
+
+  def isLongNumber(s: String): Boolean = (allCatch opt s.toLong).isDefined
+  // or
+  def isDoubleNumber(s: String): Boolean = (allCatch opt s.toDouble).isDefined
 }
