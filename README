@@ -1,4 +1,14 @@
-This is your new Play application
+Just a simple play scala app template
 =====================================
 
-This file will be packaged with your application, when using `play dist`.
+Includes the following libraries
+- Play
+- Scala
+- Neo4j
+- Spring-data
+
+- bootstrap
+- bootstrap.datetimepicker
+- fontawesome
+- jquery
+- jquery.autogrowtextarea
