@@ -2,6 +2,7 @@ Just a simple play scala app template
 =====================================
 
 Includes the following libraries
+
 backend:
 - Play
 - Scala
