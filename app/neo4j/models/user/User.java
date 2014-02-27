@@ -7,6 +7,9 @@ import org.springframework.data.annotation.TypeAlias;
 import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 @NodeEntity
 @TypeAlias("User")
 public class User extends CommentAbleModel {
@@ -63,6 +66,19 @@ public class User extends CommentAbleModel {
 
   public boolean hasMinRole(UserRole userRole) {
     return this.userRole.getRoleNumber() >= userRole.getRoleNumber();
+  }
+
+  public static Iterator<User> findListForUser(User user) {
+    switch (user.userRole) {
+      case ADMIN:
+        return Neo4JServiceProvider.get().userRepository.findAll().iterator();
+      case USER:
+        ArrayList<User> result = new ArrayList<User>();
+        result.add(user);
+        return result.iterator();
+      default:
+        return new ArrayList<User>().iterator();
+    }
   }
 
   @Override

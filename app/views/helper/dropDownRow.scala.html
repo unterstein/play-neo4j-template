@@ -1,12 +1,12 @@
-@(name: String, value: Option[String], error: Boolean, keys: java.util.List[String], values: java.util.Map[String, String], i18n: String = "", showEmpty: Boolean = false)(implicit request: play.api.mvc.Request[Any], lang: Lang)
+@(name: String, value: Option[String], error: Boolean, enumModel: _root_.helper.ViewEnumModel, i18n: String = "", showEmpty: Boolean = false)(implicit request: play.api.mvc.Request[Any], lang: Lang)
 <div class="form-group @("has-error".when(error == true))">
   <label for="@name" class="control-label">@Messages(if(i18n == "") { "field." + name.replace("[$x]", "") } else { i18n })</label>
   <select id="@name" name="@name" class="form-control">
     @if(showEmpty) {
       <option @if(value == None || value.get == "") {selected} value="">@Messages("empty.select")</option>
     }
-    @keys.map { iterValue =>
-      <option @if(value != None && value.get == iterValue) {selected} value="@iterValue">@values.get(iterValue)</option>
+    @enumModel.keys.map { iterValue =>
+      <option @if(value != None && value.get == iterValue) {selected} value="@iterValue">@enumModel.values.get(iterValue)</option>
     }
   </select>
 </div>

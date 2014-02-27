@@ -3,7 +3,6 @@
 @import neo4j.models.user.UserState
 @import neo4j.models.user.UserRole
 @import neo4j.models.user.User
-@import neo4j.models.user.Organisation
 @import global.Global
 @import views.html.helper.{inputRow, textareaRow, formErrors, dropDownRow}
 
@@ -32,27 +31,20 @@
     @if(PlaySession.isAdmin) {
       <div class="row">
         <div class="col-md-4">
-          @dropDownRow("userRole", form.data.get("userRole"), form.errors("userRole").size > 0, UserRole.keys(), UserRole.stringValues())
+          @dropDownRow("userRole", form.data.get("userRole"), form.errors("userRole").size > 0, UserRole.enumModel())
         </div>
         <div class="col-md-4 col-md-offset-2">
-          @dropDownRow("userState", form.data.get("userState"), form.errors("userState").size > 0, UserState.keys(), UserState.stringValues())
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          @dropDownRow("organisation", form.data.get("organisation"), form.errors("organisation").size > 0, Organisation.keys(id), Organisation.stringValues(id), showEmpty = true)
-          <span class="pull-right">* @Messages("admin.orga.hint")</span>
-          <br/><br/>
+          @dropDownRow("userState", form.data.get("userState"), form.errors("userState").size > 0, UserState.enumModel())
         </div>
       </div>
     } else {
-      <input type="hidden" readonly="readonly" name="userRole" value="CUSTOMER" />
+      <input type="hidden" readonly="readonly" name="userRole" value="USER" />
       <input type="hidden" readonly="readonly" name="userState" value="ACTIVE" />
     }
     <div class="row">
       <div class="col-md-12">
         <a class="btn btn-default" href="@routes.UserController.userList">@Messages("back")</a>
-        @if(id > 0 && Global.getDeleteAccess(PlaySession.getUser, classOf[User]) == AccessRight.ALL) {
+        @if(id > 0 && PlaySession.isAdmin) {
           <a class="btn btn-danger delete" data-url="@routes.UserController.delete(id)" data-success="@routes.UserController.userList">@Messages("delete")</a>
         }
         <button type="submit" class="btn btn-primary pull-right">@Messages(if(id > 0) "user.edit" else "user.create")</button>

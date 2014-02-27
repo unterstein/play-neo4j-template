@@ -1,11 +1,12 @@
 @()(implicit request: play.api.mvc.Request[Any], lang: Lang)
-@import neo4j.models.AccessRight
+
 @import global.Global
 
 @import neo4j.models.user.User
+@import scala.collection.JavaConversions._
 
 @mainPage(Html(Messages("user.list.title"))) {
-  @if(Global.hasCreateAccess(PlaySession.getUser, classOf[User])) {
+  @if(PlaySession.isAdmin) {
     <a href="@routes.UserController.create" class="btn btn-primary pull-right">@Messages("user.create")</a>
   }
   <div class="row">
