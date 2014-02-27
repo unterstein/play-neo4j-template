@@ -2,7 +2,7 @@ package neo4j.models.log;
 
 import controllers.PlaySession;
 import neo4j.models.AbstractModel;
-import neo4j.models.User;
+import neo4j.models.user.User;
 import play.api.mvc.RequestHeader;
 
 import java.text.SimpleDateFormat;

@@ -5,7 +5,7 @@ import play.api.data.Forms._
 import play.api.i18n.Messages
 import views._
 import play.api.mvc._
-import neo4j.models.{User}
+import neo4j.models.user.User
 import neo4j.models.log._
 import neo4j.services.Neo4JServiceProvider
 import _root_.global.Global
@@ -44,7 +44,7 @@ object AuthenticationController extends BaseController {
       registerForm.bindFromRequest.fold(
         formWithErrors => Ok(html.signin.loginPage(loginForm, formWithErrors)),
         value => {
-          val user = User.create(value.registerEmail, value.registerPassword) // create the user
+          val user = User.create(value.registerEmail, value.registerPassword, null) // create the user
           PlayLog.create("User registered", LogLevel.INFO, LogCategory.SESSION, request, user)
           Redirect(value.registerUrl).withSession(PlaySession.AUTH_SESSION -> value.registerEmail) // redirect please
         }

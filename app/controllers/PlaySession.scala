@@ -1,6 +1,6 @@
 package controllers
 
-import neo4j.models.User
+import neo4j.models.user.User
 
 object PlaySession extends BaseController {
   def AUTH_SESSION: String = "EMAIL"

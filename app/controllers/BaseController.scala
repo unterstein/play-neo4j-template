@@ -5,7 +5,7 @@ import neo4j.models.log.PerformanceLog
 import neo4j.models.log.LogCategory
 import scala.{None, Option}
 import scala.Predef._
-import neo4j.models.User
+import neo4j.models.user.User
 import views.html
 import play.api.i18n.Lang
 import play.api.Play.current
