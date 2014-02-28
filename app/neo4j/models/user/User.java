@@ -17,8 +17,6 @@ public class User extends CommentAbleModel {
   @Indexed
   public String email;
 
-  public String name;
-
   public String password;
 
   public UserState userState;
