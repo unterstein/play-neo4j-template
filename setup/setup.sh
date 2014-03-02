@@ -12,4 +12,4 @@ tar unzip play-2.2.1.zip
 rm play-2.2.1.zip
 
 # update .bashrc
-echo "export PATH=\$PATH:/$PWD/play-2.1.1" >> ~/.bashrc
+echo "export PATH=\$PATH:/$PWD/play-2.2.1" >> ~/.bashrc
