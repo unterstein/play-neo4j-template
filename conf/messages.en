@@ -28,7 +28,8 @@ no=No
 cancel=Cancel
 file.label=File
 file.select=Browse
-day.input.pattern=MM/dd/yyyy hh:mm
+day.input.pattern.true=MM/dd/yyyy hh:mm
+day.input.pattern.false=MM/dd/yyyy
 save=Save
 edit=Edit
 back=Back
@@ -61,6 +62,7 @@ field.userRole=User role
 field.userState= User state
 field.password=Password
 field.password.placeholder=Please enter a password
+field.date=Date
 
 # dashboard
 dashboard.title=<i class="fa fa-signal"></i> Dashboard

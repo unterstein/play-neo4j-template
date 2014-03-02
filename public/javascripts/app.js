@@ -75,6 +75,7 @@
     $(".datetimepicker").each(function() {
       $(this).datetimepicker({
         pickSeconds: false,
+        pickTime: $(this).find(":input").data("time"),
         startDate: new Date(),
         format: $(this).find(":input").data("format")
       });
