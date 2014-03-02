@@ -86,7 +86,7 @@
               </thead>
               <tbody>
               @for(urlMap: neo4j.repositories.PerformanceLogRepository.UrlMap <- Neo4JServiceProvider.get().performanceLogRepository.findRequestMaps()) {
-                @if(urlMap.getUrl.contains("J7eTQb6aTnBfHx") == false && urlMap.getTotal > 1) {
+                @if(urlMap.getTotal > 1) {
                   <tr>
                     <td>@urlMap.getUrl</td>
                     <td>@urlMap.getMin</td>
