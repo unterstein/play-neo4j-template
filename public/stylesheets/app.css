@@ -12,6 +12,10 @@ textarea {
   min-height: 250px !important;
 }
 
+.dropdown i {
+  width: 20px;
+}
+
 .uploadField {
   overflow: hidden;
 }
