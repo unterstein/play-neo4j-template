@@ -8,7 +8,7 @@ object ApplicationBuild extends Build {
   val appVersion      = "1.0-SNAPSHOT"
 
   val appDependencies = Seq(
-    "com.github.tuxBurner" %% "play-neo4jplugin" % "1.3.2",
+    "com.github.tuxBurner" %% "play-neo4jplugin" % "1.3.5",
     "commons-lang" % "commons-lang" % "2.6",
     "commons-io" % "commons-io" % "2.4",
     "com.typesafe" %% "play-plugins-mailer" % "2.1-RC2",
