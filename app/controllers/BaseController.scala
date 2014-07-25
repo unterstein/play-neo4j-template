@@ -72,10 +72,10 @@ trait BaseController extends Controller {
     Results.Ok(html.signin.loginPage(AuthenticationController.loginForm, AuthenticationController.registerForm)(request, calcLang(request)))
   }
 
-  def AuthenticatedLoggingAction(role: UserRole)(f: => Request[AnyContent] => Result) = Security.Authenticated(userUsername, userOnUnauthorized) {
+  def AuthenticatedLoggingAction(minRole: UserRole, maxRole: UserRole = UserRole.ADMIN)(f: => Request[AnyContent] => Result) = Security.Authenticated(userUsername, userOnUnauthorized) {
     user => {
       val dbUser = Neo4JServiceProvider.get().userRepository.findByEmail(user)
-      if(dbUser.hasMinRole(role)) {
+      if (dbUser.hasMinRole(minRole) && dbUser.hasMaxRole(maxRole)) {
         LoggingAction(request => f(request).withSession(PlaySession.AUTH_SESSION -> user))
       } else {
         LoggingAction(request => Redirect("404"))

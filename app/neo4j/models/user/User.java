@@ -81,6 +81,10 @@ public class User extends CommentAbleModel {
     return this.userRole.getRoleNumber() >= userRole.getRoleNumber();
   }
 
+  public boolean hasMaxRole(UserRole userRole) {
+    return this.userRole.getRoleNumber() <= userRole.getRoleNumber();
+  }
+
   public static Iterator<User> findListForUser(User user) {
     switch (user.userRole) {
       case ADMIN:
