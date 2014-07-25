@@ -1,15 +1,13 @@
 #!/bin/bash
+
+# clean previous installations
 rm -rf bin
 mkdir bin
 
-# download
+# install playframework
 cd bin
-http://downloads.typesafe.com/play/2.2.1/play-2.2.1.zip
+wget http://downloads.typesafe.com/typesafe-activator/1.2.3/typesafe-activator-1.2.3.zip
+unzip typesafe-activator-1.2.3.zip
+rm typesafe-activator-1.2.3.zip
 
-
-# install play
-unzip play-2.2.1.zip
-rm play-2.2.1.zip
-
-# update .bashrc
-echo "export PATH=\$PATH:/$PWD/play-2.2.1" >> ~/.bashrc
+echo "export PATH=\$PATH:/$PWD/typesafe-activator-1.2.3" >> ~/.bashrc
